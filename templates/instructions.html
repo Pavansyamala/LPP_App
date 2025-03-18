@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructions - LPP App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #e0eafc, #cfdef3);
+            margin: 0;
+            padding: 20px;
+            text-align: left;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            margin: auto;
+            animation: fadeIn 1s ease-in-out;
+        }
+        h2 {
+            color: #1a237e;
+            border-bottom: 2px solid #1a237e;
+            padding-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        li {
+            margin: 10px 0;
+        }
+        .highlight {
+            background: #1e88e5;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+        }
+        .button {
+            background: #42a5f5;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .button:hover {
+            background: #0d47a1;
+            transition: 0.3s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>1. Getting Started 🚀</h2>
+        <ol>
+            <li><strong>Open the App:</strong> Launch the LPP app on your device or access it through a web browser.</li>
+            <li><strong>Create a New Problem:</strong> Click on <span class="highlight">"New Problem"</span> to start defining your Linear Programming Problem.</li>
+            <li><strong>Choose the Problem Type:</strong> Select whether your problem is <span class="highlight">Maximization</span> or <span class="highlight">Minimization</span>.</li>
+            <li><strong>Understand the Interface:</strong> The app provides input fields for the <em>Objective Function</em> and <em>Constraints</em> along with an interactive workspace.</li>
+            <li><strong>Get Help if Needed:</strong> Click on the <span class="button">Help</span> or <span class="button">Instructions</span> button for guidance.</li>
+        </ol>
+        
+        <h2>2. Inputting Data ✍️</h2>
+        <ol>
+            <li><strong>Enter the Objective Function:</strong> Input the coefficients in order. Example: <span class="highlight">2, 3, 4</span>.</li>
+            <li><strong>Add Constraints:</strong> Enter constraint coefficients in the same order as the objective function.
+                <ul>
+                    <li>Example: If a constraint is <em>x₁ + 2x₂ ≤ 10</em>, enter: <span class="highlight">1, 2, 0, 10</span>.</li>
+                </ul>
+            </li>
+            <li><strong>Proceed to Solve:</strong> Click the <span class="button">"Solve"</span> button.</li>
+        </ol>
+
+        <h2>3. Solving the Problem ✅</h2>
+        <ol>
+            <li><strong>Processing the Input:</strong> The app applies the Simplex Method to compute the optimal solution.</li>
+            <li><strong>Solution Display:</strong>
+                <ul>
+                    <li>Optimal values for variables.</li>
+                    <li>Maximum or minimum value of the objective function.</li>
+                </ul>
+            </li>
+            <li><strong>Graphical Representation:</strong> If applicable, a graph may be displayed.</li>
+        </ol>
+
+        <h2>4. Interpreting Results 📊</h2>
+        <ol>
+            <li><strong>Feasible Solution:</strong> If a solution exists within the given constraints, the optimal values will be displayed.</li>
+            <li><strong>Infeasible Solution:</strong> If no solution satisfies the constraints, the app will indicate **"No feasible solution"**.</li>
+            <li><strong>Unbounded Solution:</strong> If the objective function can increase indefinitely, the app will return **"Solution is unbounded"**.</li>
+            <li><strong>Degeneracy:</strong> If multiple optimal solutions exist, the app may suggest alternative optimal points.</li>
+            <li><strong>Sensitivity Analysis:</strong> Advanced users can check how changes in coefficients affect the solution.</li>
+        </ol>
+
+        <h2>5. Advanced Features 🌟</h2>
+        <ol>
+            <li><strong>Graphical Representation:</strong> If there are two variables, a graphical solution is displayed.</li>
+            <li><strong>Integer Programming:</strong> Ensures variables take only integer values.</li>
+            <li><strong>Exporting Results:</strong> Download results as PDF/CSV for documentation.</li>
+        </ol>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">📜 Saved Problems & Solutions</h2>
+
+    {% if saved_problems %}
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Problem</th>
+                    <th>Solution</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for problem in saved_problems %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ problem.description }}</td>
+                    <td>{{ problem.solution }}</td>
+                    <td>
+                        <a href="/view_problem/{{ problem.id }}" class="btn btn-success btn-sm">🔍 View</a>
+                        <a href="/delete_problem/{{ problem.id }}" class="btn btn-danger btn-sm">🗑 Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="text-center text-muted">No saved problems yet. Solve and save one!</p>
+    {% endif %}
+
+    <div class="text-center mt-3">
+        <a href="/dashboard" class="btn btn-dark">🏠 Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

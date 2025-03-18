@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .sidebar {
+            width: 250px;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .profile-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 30px;
+        }
+        .nav-links a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+        }
+        .nav-links a:hover {
+            background: #eaeaea;
+            border-radius: 5px;
+        }
+        .saved-problems {
+            margin-top: 10px;
+        }
+        .saved-problems-header {
+            cursor: pointer;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .saved-problems-header:hover {
+            text-decoration: underline;
+        }
+        .saved-problems-content {
+            display: none; /* Initially hidden */
+            padding-left: 10px;
+        }
+        .problem-item {
+            margin-bottom: 10px;
+        }
+        .problem-buttons {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar (Left) -->
+    <div class="sidebar d-flex flex-column align-items-center">
+        <div class="profile-section">
+            <div class="profile-circle">
+                {{ first_letter }}
+            </div>
+            <p>Welcome, {{ user_name }}</p>
+        </div>        
+        
+        <h5 class="mt-2">{{ user }}</h5>
+        <div class="nav-links mt-3">
+            <a href="/dashboard"><i class="fas fa-home"></i> Home</a>
+            <a href="/new_problem"><i class="fas fa-plus"></i> Create New Problem</a>
+            
+            <!-- View Solutions with collapsible Saved Problems -->
+            <div class="nav-links-item">
+                <div class="saved-problems">
+                    <div class="saved-problems-header" onclick="toggleSavedProblems()">
+                        Saved Problems ▼
+                    </div>
+                    <div id="savedProblemsContent" class="saved-problems-content">
+                        {% if problems %}
+                            <ul>
+                                {% for problem in problems %}
+                                    <li class="problem-item">
+                                        <strong>{{ problem.optimization }} Optimization</strong> - 
+                                        Optimal Value: <strong>{{ problem.optimal_value }}</strong> 
+                                        <div class="problem-buttons">
+                                            <!-- View Details Button -->
+                                            <a href="/view_problem/{{ problem.id }}" 
+                                               class="btn btn-sm btn-info">View Details</a>
+
+                                            <!-- Delete Button -->
+                                            <button onclick="confirmDelete('{{ problem.id }}')" 
+                                                    class="btn btn-sm btn-danger">Delete</button>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>No saved problems yet.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logout -->
+            <a href="/logout" style="color: red;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
+
+     <!-- Main Content Area -->
+     <div class="content">
+        <h2>Welcome, {{ user_name }}!</h2>
+        <p>Use this dashboard to manage your linear programming problems and view solutions.</p>
+    
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title">What You Can Do Here</h5>
+                <ul>
+                    <li>💡 <b>Create New Problems</b> - Define new linear programming problems.</li>
+                    <li>📄 <b>View Solutions</b> - Check solutions to previously created problems.</li>
+                    <li>🚀 <b>Optimize Your Models</b> - Solve problems efficiently using simplex and other methods.</li>
+                </ul>
+            </div>
+        </div>
+    
+        <div class="alert alert-warning" role="alert">
+            ⚠️ <strong>Important:</strong> Please read the <a href="/instructions" class="alert-link">Instructions</a> before proceeding.
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title">Quick Actions</h5>
+                <a href="/new_problem" class="btn btn-primary">➕ Create New Problem</a>
+                <a href="/instructions" class="btn btn-info">📖 Instructions</a>
+            </div>
+        </div>
+        
+    </div>    
+
+    <!-- Add this inside the <body> after the main content -->
+<div style="position: absolute; top: 20px; right: 20px;">
+    <button id="theme-toggle" class="btn btn-dark">🌙 Dark Mode</button>
+</div>
+
+<script>
+    const toggleButton = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Check if user has a preferred theme
+    if (localStorage.getItem('theme') === 'dark') {
+        body.classList.add('dark-mode');
+        toggleButton.textContent = '☀️ Light Mode';
+        toggleButton.classList.replace('btn-dark', 'btn-light');
+    }
+
+    toggleButton.addEventListener('click', () => {
+        if (body.classList.contains('dark-mode')) {
+            body.classList.remove('dark-mode');
+            toggleButton.textContent = '🌙 Dark Mode';
+            toggleButton.classList.replace('btn-light', 'btn-dark');
+            localStorage.setItem('theme', 'light');
+        } else {
+            body.classList.add('dark-mode');
+            toggleButton.textContent = '☀️ Light Mode';
+            toggleButton.classList.replace('btn-dark', 'btn-light');
+            localStorage.setItem('theme', 'dark');
+        }
+    });
+
+    // Dark mode styles
+    const darkModeStyles = document.createElement('style');
+    darkModeStyles.innerHTML = `
+        .dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+        .dark-mode .card, 
+        .dark-mode .sidebar {
+            background-color: #444;
+            color: white;
+        }
+        .dark-mode .btn-info {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .dark-mode a {
+            color: #ddd;
+        }
+        .dark-mode a:hover {
+            color: #fff;
+        }
+    `;
+    document.head.appendChild(darkModeStyles);
+</script>
+
+
+    <!-- JavaScript for Collapsible Section and Delete Confirmation -->
+    <script>
+        // Toggles the visibility of the saved problems section
+        function toggleSavedProblems() {
+            const savedProblemsContent = document.getElementById('savedProblemsContent');
+            
+            // Toggle visibility
+            if (savedProblemsContent.style.display === 'none' || savedProblemsContent.style.display === '') {
+                savedProblemsContent.style.display = 'block';
+                document.querySelector('.saved-problems-header').textContent = 'Saved Problems ▲';
+            } else {
+                savedProblemsContent.style.display = 'none';
+                document.querySelector('.saved-problems-header').textContent = 'Saved Problems ▼';
+            }
+        }
+
+        // Asks for confirmation before deleting a problem
+        function confirmDelete(problemId) {
+            const confirmation = confirm("Are you sure you want to delete this problem?");
+            
+            if (confirmation) {
+                // Redirect to server-side delete route or make an API call
+                window.location.href = `/delete_problem/${problemId}`;
+                // Alternatively, you can use AJAX or fetch to delete without reloading
+                // fetch(`/delete_problem/${problemId}`, { method: 'DELETE' });
+                alert("Problem deleted successfully!");
+            } else {
+                alert("Deletion canceled.");
+            }
+        }
+    </script>
+
+</body>
+</html>

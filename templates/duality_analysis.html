@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duality Analysis</title>
+    <style>
+        /* Background */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #141e30, #243b55); /* Dark Blue Gradient */
+            color: white;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        /* Heading */
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        /* Iteration container */
+        .iteration {
+            background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            transform: perspective(1000px) rotateX(10deg); /* 3D effect */
+            transition: 0.4s ease-in-out;
+        }
+
+        /* Hover Effect */
+        .iteration:hover {
+            transform: perspective(1000px) rotateX(0deg) scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Iteration Heading */
+        h2 {
+            color: #ffcc00;
+            border-bottom: 2px solid #ffcc00;
+            padding-bottom: 5px;
+            transition: 0.3s;
+        }
+
+        /* Objective Function */
+        .objective {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #00ff99;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        /* Constraints */
+        .constraints {
+            margin-left: 20px;
+            font-size: 1.1rem;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideIn 0.7s ease-out forwards;
+        }
+
+        /* Constraint Items */
+        .constraints li {
+            list-style: none;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            transition: 0.3s;
+        }
+
+        .constraints li:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Duality Analysis</h1>
+
+    {% for iteration in iterations %}
+        <div class="iteration">
+            <h2>Iteration {{ iteration.iteration }}</h2>
+
+            <p class="objective">Objective Function: {{ iteration.objective }}</p>
+
+            <p><strong>Constraints:</strong></p>
+            <ul class="constraints">
+                {% for constraint in iteration.constraints %}
+                    <li>{{ constraint }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+
+</body>
+</html>

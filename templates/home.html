@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <style>
+        body {
+            background: linear-gradient(135deg, #141E30, #243B55); /* Deep blue gradient */
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .container {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .content-box {
+            background: rgba(255, 255, 255, 0.1); /* Slightly transparent box */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            max-width: 850px;
+            margin: auto;
+            text-align: left;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1, h2 {
+            text-align: center;
+            font-weight: bold;
+            color: #FFD700;
+        }
+
+        h1 {
+            font-size: 36px;
+            background: linear-gradient(45deg, #FFD700, #FF6347);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        .key-features {
+            list-style: none;
+            padding: 0;
+            font-size: 18px;
+        }
+
+        .key-features li {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: transform 0.3s;
+        }
+
+        .key-features li:hover {
+            transform: scale(1.05);
+        }
+
+        .icon {
+            font-size: 24px;
+            color: #FFD700;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+
+    <div class="container">
+        <h1 class="animated-title">Operations Research & Linear Programming</h1>
+
+        <div class="content-box">
+            <h2>About This Website</h2>
+            <p>
+                This platform helps students, researchers, and professionals solve 
+                <strong>Operations Research</strong> and <strong>Linear Programming</strong> problems effectively.
+            </p>
+
+            <h3>Key Features:</h3>
+            <ul class="key-features">
+                <li><span class="icon">✅</span> <strong>Get Optimized Solutions:</strong> Solve LP problems using the <em>Simplex Method</em>.</li>
+                <li><span class="icon">💾</span> <strong>Save Your Work:</strong> Store and retrieve your solved problems anytime.</li>
+                <li><span class="icon">📊</span> <strong>Detailed Sensitivity Analysis:</strong> See how changes impact the solution.</li>
+                <li><span class="icon">❗</span> <strong>Feasibility Analysis:</strong> Get suggestions to make infeasible problems feasible.</li>
+                <li><span class="icon">📈</span> <strong>Graphical Representation:</strong> Visualize solution space & constraints.</li>
+                <li><span class="icon">✨</span> <strong>Intuitive Design:</strong> Simple UI for quick problem-solving.</li>
+            </ul>
+
+            <h3>How to Use:</h3>
+            <ul>
+                <li>🔹 Login using your email and password.</li>
+                <li>🔹 Click on create a new problem.</li>
+                <li>🔹 Formulate a Linear Programming problem.</li>
+                <li>🔹 Get optimized solutions and insights.</li>
+                <li>🔹 Save and manage your solved problems.</li>
+            </ul>
+        </div>
+    </div>
+
+    <audio id="bg-audio-1" autoplay loop>
+        <source src="{{ url_for('static', filename='background_music2.mp3') }}" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <audio id="bg-audio-2">
+        <source src="{{ url_for('static', filename='operations_research.mp3') }}" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script>
+        document.addEventListener('click', function() {
+            let narration = document.getElementById("bg-audio-2");
+            let music = document.getElementById("bg-audio-1");
+            let playCount = 0; // Counter to track music playtimes
+    
+            // Start both audios on user interaction
+            music.play();
+            narration.play();
+    
+            // Stop narration after it finishes playing once
+            narration.onended = function() {
+                narration.pause();
+                narration.currentTime = 0; // Reset to start (optional)
+            };
+    
+            // Play background music twice
+            music.onended = function() {
+                if (playCount < 2) { 
+                    playCount++; // Increase counter
+                    music.currentTime = 0; // Restart music
+                    music.play();
+                } else {
+                    music.pause();
+                    music.currentTime = 0; // Reset (optional)
+                }
+            };
+        }, { once: true }); // Ensures it starts only once when clicked
+    </script>
+    
+    
+    
+{% endblock %}

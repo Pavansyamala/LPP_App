@@ -1,0 +1,161 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+
+h2 {
+    color: #2c3e50;
+}
+
+ol {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: black;
+    padding: 10px;
+    text-align: center;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: inline-block;
+}
+
+header {
+    background-color: black;
+    padding: 15px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* Search History */
+.search-history {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f4f4f4;
+    border-radius: 5px;
+    text-align: left;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Main Section */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+}
+
+/* Flash Messages */
+.flashes {
+    color: red;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.flashes li {
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+.flashes li:last-child {
+    border-bottom: none;
+}
+
+/* Profile Circle */
+.profile-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* DARK MODE STYLES */
+.dark-mode a {
+    color: #4db8ff !important;  /* Light blue for better visibility */
+}
+
+.dark-mode a:hover {
+    color: #66ccff !important; /* Brighter blue when hovered */
+}
+
+/* Improve Visibility of Instructions Link */
+.dark-mode a[href*="instructions"] {
+    color: #ffcc00 !important; /* Bright yellow */
+    font-weight: bold !important;
+    text-decoration: underline !important;
+}
+
+/* Fix the Profile Circle Visibility */
+.dark-mode .profile-circle {
+    background-color: #444 !important; /* Darker background */
+    color: #ffcc00 !important; /* Bright yellow text */
+    font-weight: bold !important;
+}
+
+@keyframes title3DAnimation {
+    0% {
+        transform: scale(0.5) translateZ(-100px);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2) translateZ(20px);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1) translateZ(0);
+        opacity: 1;
+    }
+}
+
+.animated-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: white; /* Change color as needed */
+    text-align: center;
+    transform-origin: center;
+    animation: title3DAnimation 1.5s ease-out forwards;
+}
