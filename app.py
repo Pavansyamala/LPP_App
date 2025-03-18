@@ -9,7 +9,10 @@ from authlib.integrations.flask_client import OAuth
 import matplotlib.pyplot as plt
 import io
 from scipy.optimize import linprog
+from dotenv import load_dotenv
 import os
+
+load_dotenv()
 
 GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
 GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")

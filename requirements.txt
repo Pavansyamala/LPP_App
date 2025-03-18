@@ -6,4 +6,6 @@ flask_oauthlib
 pymongo
 matplotlib
 scipy
-psycopg2
+psycopg2-binary
+gunicorn
+authlib
