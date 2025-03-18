@@ -9,3 +9,4 @@ scipy
 psycopg2-binary
 gunicorn
 authlib
+dotenv
